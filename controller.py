@@ -12,7 +12,7 @@ statu=0
 identifyok=False
 randmsg:str=''
 stage=dict()
-devices=set(conn.online_users.remove(conn.nick))
+devices=set(conn.online_users.remove([conn.nick]))
 for i in devices:
     stage.update(i:0)
 t=threading.Thread(target=operate)
@@ -62,11 +62,11 @@ def finddevices(conn,nick):
     global devices
     print('Verifying devices...')
     print('Current devices:',end='')
-    devices=set(conn.online_users.remove(conn.nick))
+    devices=set(conn.online_users.remove([conn.nick]))
     temp=devices
     for i in temp:
         if identify(conn,i)==False:
-            devices.remove(i)
+            devices.remove([i])
     print(devices,sep=',')
 
 def identify(conn,u:str) -> bool:
